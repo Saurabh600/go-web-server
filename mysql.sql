@@ -1,0 +1,26 @@
+-- Users Table
+CREATE TABLE IF NOT EXISTS Users (
+  id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(25) NOT NULL,
+  last_name VARCHAR(25),
+  email VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(50) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  gender ENUM('male', 'female', 'gay', 'lesbian', 'transgender', 'other') NOT NULL,
+  age INT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+
+-- Todos Table
+CREATE TABLE IF NOT EXISTS Todos (
+  id INT AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  todo TEXT NOT NULL,
+  done BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES Users(id)
+);
